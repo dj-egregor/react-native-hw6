@@ -35,13 +35,29 @@ export default function CreatePostsScreen({ navigation }) {
     navigation.navigate('PostsScreen');
   };
 
+  // const uploadPostToServer = async () => {
+  //   const photo = await uploadPhotoToServer();
+  //   const createPost = await addDoc(collection(db, 'posts'), {
+  //     photo,
+  //     title,
+  //     locationName,
+  //     location: location.coords,
+  //     userId,
+  //     login,
+  //   });
+  // };
+
   const uploadPostToServer = async () => {
     const photo = await uploadPhotoToServer();
+    let locationCoords = '';
+    if (location && location.coords) {
+      locationCoords = location.coords;
+    }
     const createPost = await addDoc(collection(db, 'posts'), {
       photo,
       title,
       locationName,
-      location: location.coords,
+      location: locationCoords,
       userId,
       login,
     });
